@@ -35,42 +35,48 @@ module.exports = {
           'babel-loader',
         ],
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: ExtractTextPlugin.extract({
-      //     use: 'css-loader',
-      //   }),
-      // }
       {
         test: /\.css$/,
+        exclude: [/\.global\./, /node_modules/],
+        //loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
         use: [
-            {
-                loader: "style-loader"
-            }, 
-            {
-                loader: "css-loader",
-                options: {
-                    modules: true
-                }
-            }, 
-            // {
-            //     loader: "postcss-loader"
-            // }
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: false,
+              autoprefixer: true,
+              minimize: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
         ]
       },
       {
         test: /antd.*\.less$/,
         use: [{
-            loader: "style-loader"
+          loader: "style-loader"
         }, {
-            loader: "css-loader" 
+          loader: "css-loader"
         }, {
-            loader: "less-loader",
-            options: { javascriptEnabled: true }
+          loader: "less-loader",
+          options: { javascriptEnabled: true }
         },
-        //"postcss-loader"
         ]
       },
+      // {
+      //   test: /\.less$/,
+      //   use: [{
+      //     loader: "style-loader"
+      //   },
+      //   {
+      //     loader: "less-loader",
+      //   },
+      //   ]
+      // },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
@@ -88,10 +94,10 @@ module.exports = {
 
   devServer: {
     port: "8000",
-    historyApiFallback: true, 
-    inline: true,  
+    historyApiFallback: true,
+    inline: true,
     hot: true
-},
+  },
 
   // Dev server configuration 
   // devServer: {
