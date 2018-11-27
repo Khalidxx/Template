@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { Button } from 'antd';
+import Home from './pages/home';
+import Greeting from './pages/greeting'
 
-import '../CSS/main.css';
 
-export default class MainApp extends Component {
-    render(){
-        return(
-            <div className='container'>
-                <h1 className='title'>Welcome to React!</h1>
-                <Button type = 'primary'> Hello </Button>
-                <Button> Goodbye </Button>
+ReactDOM.render(
+    <Router>
+        <div>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/greeting" component={Greeting} />
             </div>
-        );
-    }
-}
-
-render(<MainApp />, document.getElementById('app'));
+    </Router>, 
+    document.getElementById('app')
+)
